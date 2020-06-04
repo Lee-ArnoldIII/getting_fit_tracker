@@ -17,8 +17,8 @@ class User:
 
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute('INSERT INTO users (email, first_name, last_name, oauth_token, oauth_token_secret) VALUES (%s, %s, %s, %s, %s)',
-                          (self.email, self.first_name, self.last_name))
+            cursor.execute('INSERT INTO users (email, first_name, last_name, date_of_birth, gender, height ) VALUES (%s, %s, %s, %s, %s, %s)',
+                          (self.email, self.first_name, self.last_name, self.date_of_birth, self.gender, self.height))
         
 
     @classmethod
