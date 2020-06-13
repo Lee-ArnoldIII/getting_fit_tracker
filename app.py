@@ -21,6 +21,14 @@ app.secret_key = 'youdontgettoknowthis'
 
 # Database.initialise(database='getting_fit_tracker', user='postgres', password='Outsmart1!@', host='localhost')
 
+@app.before_request
+def before_request():
+    g.user = None
+
+    if 'user_id' in session:
+        user = [x for x in users if x.id == session['user_id']][0]
+        g.user = user
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -40,6 +48,9 @@ def login():
 
 @app.route('/profile')
 def profile():
+    if not g.user:
+        return redirect(url_for('login'))
+        
     return render_template('profile.html')
 
 app.run(port=4995, debug=True)
