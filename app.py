@@ -51,6 +51,11 @@ def submit():
         gender = request.form['gender']
         height = request.form['height']
         print(email, first_name, last_name, date_of_birth, gender, height)
+        if email == '' or 
+
+        # Add condition checks for validation and redirect
+        # Set up db query code
+        # Set up app.run code
 
 
 
