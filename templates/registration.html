@@ -11,8 +11,8 @@
         <form action='/submit' method="POST">
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="firstName">Username</label>
-                    <input type="text" name='address' class="form-control" id="firstName">
+                    <label for="username">Username</label>
+                    <input type="text" name='username' class="form-control" id="username">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="inputEmail4">Email</label>
@@ -27,7 +27,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="firstName">First name</label>
-                    <input type="text" name='address' class="form-control" id="firstName" placeholder="First name">
+                    <input type="text" name='firstName' class="form-control" id="firstName" placeholder="First name">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="lastName">Last name</label>
@@ -36,45 +36,62 @@
             </div>
                            
             <div class="form-row">
-            <div class="form-group col-md-4">
+            <!-- <div class="form-group col-md-4">
                 <label for="dob">Date of Birth</label>
                 <input type="text" name='dob' class="form-control" id="dob" placeholder="dd/mm/yyyy">
-            </div>
+            </div> -->
             <div class="form-group col-md-4">
-                <label for="userHeightInFeet">Height (ft)</label>
-                <select name='heightFeet' class="custom-select mr-sm-2" id="userHeightInFeet">
+                <label for="height">Height (ft.in)</label>
+                <select name='height' class="custom-select mr-sm-2" id="height">
                     <option selected>Choose...</option>
                     <option value="1">4</option>
-                    <option value="2">5</option>
-                    <option value="3">6</option>
-                    <option value="4">7</option>
+                    <option value="2">4.1</option>
+                    <option value="3">4.2</option>
+                    <option value="4">4.3</option>
+                    <option value="5">4.4</option>
+                    <option value="6">4.5</option>
+                    <option value="7">4.6</option>
+                    <option value="8">4.7</option>
+                    <option value="9">4.8</option>
+                    <option value="10">4.9</option>
+                    <option value="11">4.10</option>
+                    <option value="12">4.11</option>
+                    <option value="13">5</option>
+                    <option value="14">5.1</option>
+                    <option value="15">5.2</option>
+                    <option value="16">5.3</option>
+                    <option value="17">5.4</option>
+                    <option value="18">5.5</option>
+                    <option value="19">5.6</option>
+                    <option value="20">5.7</option>
+                    <option value="21">5.8</option>
+                    <option value="22">5.9</option>
+                    <option value="23">5.10</option>
+                    <option value="24">5.11</option>
+                    <option value="25">6</option>
+                    <option value="26">6.1</option>
+                    <option value="27">6.2</option>
+                    <option value="28">6.3</option>
+                    <option value="29">6.4</option>
+                    <option value="30">6.5</option>
+                    <option value="31">6.6</option>
+                    <option value="32">6.7</option>
+                    <option value="33">6.8</option>
+                    <option value="34">6.9</option>
+                    <option value="35">6.10</option>
+                    <option value="36">6.11</option>
+                    <option value="37">7</option>
                   </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="userHeightInInches">Height (in)</label>
-                <select name='heightInches' class="custom-select mr-sm-2" id="userHeightInInches">
-                    <option selected>Choose...</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                  </select>
-            </div>
-              <div class="col-auto my-1">
                 <label for="gender">Gender</label>
                 <select name='gender' class="custom-select mr-sm-2" id="gender">
-                  <option selected>Choose...</option>
-                  <option value="1">Male</option>
-                  <option value="2">Female</option>
-                </select>
-              </div>
+                    <option selected>Choose...</option>
+                    <option value="1">Female</option>
+                    <option value="2">Male</option>
+                    <option value="3">Prefer not to say</option>
+                  </select>
+            </div>
             </div>
             <div class="form-group col-sm-2">
                 <button type="submit" class="btn btn-primary">Sign in</button>

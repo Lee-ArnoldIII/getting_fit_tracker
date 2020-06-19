@@ -9,7 +9,7 @@ ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Outsmart1!@@localhost/get_fit_tracker'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Outsmart1!@@localhost/getting_fit_tracker'
 else:
     app.debug = False
     app.config['SQLALCHEMY_DATABASE_URI'] = ''
@@ -18,25 +18,28 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-class Feedback(db.Model):
+class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(200), unique=True)
     email = db.Column(db.String(200), unique=True)
+    password = db.Column(db.String(200))
     first_name = db.Column(db.String(200))
     last_name = db.Column(db.String(200))
-    date_of_birth = db.Column(db.DateTime())
     gender = db.Column(db.String(200))
     height = db.Column(db.Integer)
 
-    def __init__(self, email, first_name, last_name, date_of_birth, gender, height):
+    def __init__(self, username, email, password, first_name, last_name, gender, height):
+        self.username = username
         self.email = email
+        self.password = password
         self.first_name = first_name
         self.last_name = last_name
-        self.date_of_birth = date_of_birth
         self.gender = gender
         self.height = height
 
-@app.route('/registration')
+
+@app.route('/')
 def registration():
     return render_template('registration.html')
 
@@ -44,14 +47,28 @@ def registration():
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
+        username = request.form['username']
         email = request.form['email']
+        password = request.form['password']
         first_name = request.form['firstName']
         last_name = request.form['lastName']
-        date_of_birth = request.form['dob']
         gender = request.form['gender']
         height = request.form['height']
-        print(email, first_name, last_name, date_of_birth, gender, height)
-        if email == '' or 
+               
+        print(email, first_name, last_name, gender, height, username, password)
+        if email == '' or username == '':
+            return render_template('registration.html', message='Please enter required fields')
+        if db.session.query(User).filter(User.username == username).count() == 0:
+            data = User(username, email, password, first_name, last_name, gender, height)
+            db.session.add(data)
+            db.session.commit()
+            return render_template('success.html')
+        return render_template('registration.html', message='An account with that information already exists')
+
+
+if __name__ == '__main__':
+            app.run()
+
 
         # Add condition checks for validation and redirect
         # Set up db query code
