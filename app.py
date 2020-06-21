@@ -65,7 +65,7 @@ def submit():
             return render_template('success.html')
         return render_template('registration.html', message='An account with that information already exists')
 
-
+  
 if __name__ == '__main__':
             app.run()
 
