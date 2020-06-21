@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class='container'>
+        {% if message %}
+        <p class='message'>{{ message | safe }}</p>
+        {% endif %} 
         <form method="POST">
             <div class="form-group">
             <label for="exampleInputEmail1">Username</label>
@@ -20,7 +23,7 @@
             <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
             </div>
             
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Log in</button>
         </form>
     </div>
     
