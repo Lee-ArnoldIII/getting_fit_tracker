@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 # from user import User
 # from database import Database
@@ -39,10 +39,29 @@ class User(db.Model):
         self.height = height
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == '' or password == '':
+            return render_template('login.html', message='Please enter requied fields')
+        if User.query.filter_by(username=username).all():
+            if User.query.filter_by(password=password).all():
+                return redirect(url_for('dashboard'))
+            return render_template('login.html', message='Username/Password does not match')
+        return render_template('login.html', message='User does not exist')
+    return render_template('login.html')
+
+@app.route('/registration', methods=['GET'])
 def registration():
     return render_template('registration.html')
-
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -65,20 +84,17 @@ def submit():
             return render_template('success.html')
         return render_template('registration.html', message='An account with that information already exists')
 
-  
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+
+@app.route('/workout_log', methods=['GET', 'POST'])
+def workout_log():
+    return render_template('workout_log.html')
+
 if __name__ == '__main__':
-            app.run()
-
-
-        # Add condition checks for validation and redirect
-        # Set up db query code
-        # Set up app.run code
-
-
-
-
-
-
+    app.run()
 
 
 '''
