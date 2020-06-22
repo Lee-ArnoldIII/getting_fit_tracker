@@ -4,11 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
     <title>Log In</title>
 </head>
 <body>
+    <div class="container">
+
+    </div>
     <div class='container'>
-        {% if message %}
+       <div class="row">
+         <div class="col">
+            left
+        </div>
+
+        <div class='col-lg'>
+          {% if message %}
         <p class='message'>{{ message | safe }}</p>
         {% endif %} 
         <form action='/login' method="POST">
@@ -24,7 +34,14 @@
             </div>
             
             <button type="submit" class="btn btn-primary">Log in</button>
-        </form>
+        </form>  
+        </div>  
+        <div class='col-xl'>
+            right
+        </div>
+       </div>
+        
+        
     </div>
     
 </body>
