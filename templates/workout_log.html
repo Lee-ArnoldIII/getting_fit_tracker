@@ -7,8 +7,63 @@
     <title>Workout Log</title>
 </head>
 <body>
-    <form>
-        add form items here
-    </form>
+    <!-- jumbotron block -->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Getting Fit Tracker</h1>
+          <p class="lead">Log Your Workouts Below</p>
+        </div>
+    </div>
+
+    
+    
+    <div class='container-fluid'>
+        <div class='row'>
+            <div class='col'>
+                {% if message %}
+                <p class='message'>{{ message | safe }}</p>
+                {% endif %} 
+<!-- double check that this works -->
+                    <form action='/workout_log' method="POST">
+                        <!-- workout_type -->
+                        <div class="form-row">
+                            <div class="form-group col-lg-4">
+                                <label for="workout_type">Username</label>
+                                <select name='workout_type' class="custom-select mr-sm-2" id="workout_type">
+                                    <option selected>Choose...</option>
+                                    <option value="cardio">Cardio</option>
+                                    <option value="interval">HIIT/Interval</option>
+                                    <option value="aquatics">Aquatics</option>
+                                    <option value="strength">Strength Training</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- workout_length -->
+                        <div class="form-row">
+                            <div class="form-group col-lg-4">
+                                <label for="workout_length">Workout Length (in minutes)</label>
+                                <input type="text" name='workout_length' class="form-control" id="workout_length" placeholder="How long was your workout?">
+                            </div>
+                        </div>
+                        <!-- item -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="item">Describe your workout</label>
+                                <input type="text" name='item' class="form-control" id="item" placeholder="What was your workout?">
+                            </div>
+                        </div>
+                        <!-- submit -->
+                        <div class="form-group col-sm-2">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+            </div>
+            <div class='col-md'>
+                
+            </div>
+        </div>
+       
+    </div>
+    
 </body>
 </html>

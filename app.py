@@ -28,6 +28,7 @@ class User(db.Model):
     last_name = db.Column(db.String(200))
     gender = db.Column(db.String(200))
     height = db.Column(db.Integer)
+    workouts = db.relationship('Workouts', backref='user', lazy=True)
 
     def __init__(self, username, email, password, first_name, last_name, gender, height):
         self.username = username
@@ -38,6 +39,19 @@ class User(db.Model):
         self.gender = gender
         self.height = height
 
+class Workouts(db.Model):
+    __tablename__ = 'workouts'
+    id = db.Column(db.Integer, primary_key=True)
+    workout_type = db.Column(db.String(200))
+    workout_length = db.Column(db.String(200))
+    item = db.Column(db.String(200))
+    users_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    def __init__(self, workout_type, workout_length, item):
+        self.workout_type
+        self.workout_length = workout_length
+        self.item = item
+    
 
 @app.route('/', methods=['GET'])
 def home():
@@ -90,7 +104,15 @@ def dashboard():
 
 
 @app.route('/workout_log', methods=['GET', 'POST'])
-def workout_log():
+def workouts():
+    if request.method == 'POST':
+        workout_type = request.form['workout_type']
+        workout_length = request.form['workout_length']
+        item = request.form['item']
+
+        if workout_type == '' or workout_length == '' or item == '':
+            return render_template('workout_log.html', message='Please enter required fields')
+        
     return render_template('workout_log.html')
 
 if __name__ == '__main__':
