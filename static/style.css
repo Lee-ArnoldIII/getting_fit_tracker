@@ -14,7 +14,7 @@
 
 .section-1 {
     height: 100vh;
-    background-image: url(landing_page_1.jpg);
+    background-image: url("../static/img/landing_page_1.jpg");
     background-attachment: fixed;
     background-size: cover;
 }
@@ -25,7 +25,7 @@
 
 
 .section-3 {
-    background-image: url(landing_page_2.jpg);
+    background-image: url("../static/img/landing_page_2.jpg");
     background-attachment: fixed;
     background-size: cover;
 }
