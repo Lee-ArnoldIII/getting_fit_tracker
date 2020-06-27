@@ -1,10 +1,11 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 # from user import User
 # from database import Database
 
 app = Flask(__name__)
 
+app.secret_key = '1234'
 ENV = 'dev'
 
 if ENV == 'dev':
@@ -47,11 +48,34 @@ class Workouts(db.Model):
     item = db.Column(db.String(200))
     users_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    def __init__(self, workout_type, workout_length, item):
-        self.workout_type
+    def __init__(self, workout_type, workout_length, item, users_id):
+        self.workout_type = workout_type
         self.workout_length = workout_length
         self.item = item
+        self.users_id = users_id
     
+
+
+# @app.before_request
+# def before_request():
+#     g.user = None
+
+    # if 'user_id' in session:
+    #     user = [x for x in users if x.id == session['user_id']][0]
+    #     g.user = user
+
+    #     if request.method == 'POST':
+#         session.pop('user_id', None)
+        
+#         username = request.form['username']
+#         password = request.form['password']
+
+#         # user = [x for x in users if x.username == username][0]
+#         # if user and user.password == password:
+#         #     session['user_id'] = user.id
+#         #     return redirect(url_for('profile'))
+
+#         return redirect(url_for('login'))
 
 @app.route('/', methods=['GET'])
 def home():
@@ -68,6 +92,8 @@ def login():
             return render_template('login.html', message='Please enter requied fields')
         if User.query.filter_by(username=username).all():
             if User.query.filter_by(password=password).all():
+                session['username'] = username 
+                print(session['username'])
                 return redirect(url_for('dashboard'))
             return render_template('login.html', message='Username/Password does not match')
         return render_template('login.html', message='User does not exist')
@@ -100,20 +126,35 @@ def submit():
 
 @app.route('/dashboard')
 def dashboard():
+    print(session['username'])
     return render_template('dashboard.html')
 
 
 @app.route('/workout_log', methods=['GET', 'POST'])
 def workouts():
+    
     if request.method == 'POST':
         workout_type = request.form['workout_type']
         workout_length = request.form['workout_length']
         item = request.form['item']
+        users_id = None
 
         if workout_type == '' or workout_length == '' or item == '':
             return render_template('workout_log.html', message='Please enter required fields')
-        
+        if User.query.filter_by(username=session['username']).count() == 1:
+            users_id = User.query.filter_by(username=session['username']).first()
+            print('There is a user')
+            print(users_id.id)
+            data = Workouts(workout_type, workout_length, item, users_id.id)
+            db.session.add(data)
+            db.session.commit()
+            return render_template('workout_log.html', message='Workout logged successfuly!')
     return render_template('workout_log.html')
+
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run()
