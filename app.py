@@ -154,7 +154,7 @@ def workouts():
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session.pop('username', None)
-    return redirect(url_for('login'))
+    return render_template('login.html', message='You have been logged out')
 
 if __name__ == '__main__':
     app.run()
@@ -223,19 +223,8 @@ All code below is previous version of connection to db. Replaced with above code
 
 # app.run(port=4995, debug=True)
 
-# user_email = input("Please enter your email: ")
-# user_first_name = input("Please enter your first name: ")
-# user_last_name = input("Please enter your last name: ")
-# user_dob = input("When were you born (YYYY-MM-DD format): ")
-# user_gender = input("What is your gender: ")
-# user_height = input("How tall are you (FT.IN format i.e. 5.7): ")
 
-# Create User 
-# user = User(user_email, user_first_name, user_last_name, user_dob, user_gender, user_height, None)
-# Save User to DB
-# user.save_to_db()
 
-# Create login functionality if needed
-# user_entered_email = input('What is your email address: ')
-# user.load_from_db_by_email(user_entered_email)
+
+
 
