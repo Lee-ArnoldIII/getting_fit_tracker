@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-# from user import User
-# from database import Database
+
 
 app = Flask(__name__)
 
