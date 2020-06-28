@@ -6,14 +6,14 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 app.secret_key = '1234'
-ENV = 'dev'
+ENV = 'prod'
 
 if ENV == 'dev':
     app.debug = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Outsmart1!@@localhost/getting_fit_tracker'
 else:
     app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = ''
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://uxtdeekazwvzvh:4cec2432430dd3c9bd0035b438b7c95ca84a04bc8543924bcf18ae8ec3276ba9@ec2-52-72-65-76.compute-1.amazonaws.com:5432/dbd00ki5fp792n'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
