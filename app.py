@@ -125,7 +125,7 @@ def submit():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    if session['username'] == '':
+    if not session['username']:
         return render_template('login.html', message='Please log in')
     print(session['username'])
     return render_template('dashboard.html')
