@@ -2,3 +2,6 @@ oauth2
 psycopg2
 Flask==1.0.0
 requests
+Flask-SQLAlchemy
+gunicorn
+SQLAlchemy
