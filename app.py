@@ -123,10 +123,10 @@ def submit():
             return render_template('success.html')
         return render_template('registration.html', message='An account with that information already exists')
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     if session['username'] == '':
-        return render_template('login.html', message='If you have an account, please log in. If not create an account.')
+        return render_template('login.html', message='Please log in')
     print(session['username'])
     return render_template('dashboard.html')
 
