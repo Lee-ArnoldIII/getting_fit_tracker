@@ -5,8 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 app.secret_key = '1234'
-# ENV = 'prod'
-ENV = 'dev'
+ENV = 'prod'
+# ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
