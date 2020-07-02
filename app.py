@@ -5,7 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 app.secret_key = '1234'
-ENV = 'prod'
+# ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
@@ -75,7 +76,6 @@ class Workouts(db.Model):
 #         #     return redirect(url_for('profile'))
 
 #         return redirect(url_for('login'))
-
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
@@ -125,11 +125,19 @@ def submit():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    return render_template('dashboard.html')
+    if session:
+        if session['username']:
+            return render_template('dashboard.html')
+        return render_template('login.html', message='Please log in')
+    return render_template('login.html', message='You Must Log In to Use Dashboard')
 
 
 @app.route('/workout_log', methods=['GET', 'POST'])
 def workouts():
+    if session:
+        if session['username']:
+            return render_template('workout_log.html')
+    return render_template('login.html', message='Please log in')
     
     if request.method == 'POST':
         workout_type = request.form['workout_type']

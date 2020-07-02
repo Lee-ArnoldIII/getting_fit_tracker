@@ -25,8 +25,11 @@
           <p class="lead">Hi , Welcome to the Fit Tracker App!</p>
         </div>
     </div>
-    <!-- main body space -->
+    <!-- main body space -->    
     <div class='container'>
+    {% if message %}
+      <p class='message'>{{ message | safe }}</p>
+    {% endif %}
       <div class="row">
         <h3>Welcome Back (first_name)!</h3>
       </div>
