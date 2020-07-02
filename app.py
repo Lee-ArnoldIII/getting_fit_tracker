@@ -123,11 +123,9 @@ def submit():
             return render_template('success.html')
         return render_template('registration.html', message='An account with that information already exists')
 
-@app.route('/dashboard', methods=['GET'])
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    if username == session['username']:
-        return render_template('dashboard.html')
-    return render_template('login.html', message='Please log in')
+    return render_template('dashboard.html')
 
 
 @app.route('/workout_log', methods=['GET', 'POST'])
