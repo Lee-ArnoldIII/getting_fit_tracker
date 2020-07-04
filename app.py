@@ -5,8 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 app.secret_key = '1234'
-ENV = 'prod'
-# ENV = 'dev'
+# ENV = 'prod'
+ENV = 'dev'
 
 if ENV == 'dev':
     app.debug = True
@@ -55,27 +55,6 @@ class Workouts(db.Model):
         self.users_id = users_id
     
 
-
-# @app.before_request
-# def before_request():
-#     g.user = None
-
-    # if 'user_id' in session:
-    #     user = [x for x in users if x.id == session['user_id']][0]
-    #     g.user = user
-
-    #     if request.method == 'POST':
-#         session.pop('user_id', None)
-        
-#         username = request.form['username']
-#         password = request.form['password']
-
-#         # user = [x for x in users if x.username == username][0]
-#         # if user and user.password == password:
-#         #     session['user_id'] = user.id
-#         #     return redirect(url_for('profile'))
-
-#         return redirect(url_for('login'))
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
